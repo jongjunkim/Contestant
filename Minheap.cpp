@@ -4,15 +4,15 @@ using namespace std;
 
 
     //find contestant with given ID
-   void Minheap::findConetestant(int id){
+   void Minheap::findConetestant(int id, ofstream &result){
 
         int number = extend[id];
         if(number > 0){
-            cout << "Contestant <" << id << "> is in the extended heap with score <" 
+            result << "Contestant <" << id << "> is in the extended heap with score <" 
             << list[number].getPoint() << ">." << endl;
     
         }else{
-            cout << "Contestant <" << id << "> is not in the extended heap" << endl;
+            result << "Contestant <" << id << "> is not in the extended heap" << endl;
         }
         
 
@@ -20,15 +20,16 @@ using namespace std;
 
 
     //Insert Contestant to Extended heap and print if there is no room to insert Contestant
-   void Minheap::insertContestant(Contestant person){
+   void Minheap::insertContestant(Contestant person, ofstream &result){
 
         if(num != list_size ){
             list[num] = Contestant(person.getId(), person.getPoint());
+            result << "Conestant <" << person.getId() << "> inserted with initial score <" << person.getPoint() << ">" << endl;
             extend[num] = person.getId();
             num++;
             heapUpward(num-1);
         }else{
-            cout << "Conestant <" << person.getId() << "> " << "could not be inserted because the extended heap is full" << endl;  
+            result << "Conestant <" << person.getId() << "> " << "could not be inserted because the extended heap is full" << endl;  
         }
     }
 
@@ -81,10 +82,12 @@ using namespace std;
     }
 
     //To revmoe the root node, swap it with the last element of the array and remove
-    void Minheap::eliminateWeakest(){
+    void Minheap::eliminateWeakest(ofstream &result){
 
         if(num > 1){
-            cout << "Contestant <" << list[1].getId() << "> with current lowest score <" << list[1].getPoint() << "> eliminated" <<endl;
+            result << "Contestant <" << list[1].getId() << "> with current lowest score <" 
+            << list[1].getPoint() << "> eliminated" <<endl;
+            
             extend[list[1].getId()] = -1;
             swap(list[1], list[num-1]);
             list[num-1] = Contestant(0,0);
@@ -110,73 +113,88 @@ using namespace std;
 
     //Add point if Contestant is found, if not print Contestant is not in extended heap
     //since point is added, heapify down
-    void Minheap::earnPoints(int id, int point){
+    void Minheap::earnPoints(int id, int point, ofstream &result){
         
         int whatId = getContestant(id).getId();
         if(whatId != 0){
             int score = getContestant(id).getPoint();
             getContestant(id).setPoint(score + point);
             heapDownward(extend[id]);
-            cout << "Contestant <" << id << ">'s score increased by <" << score << "> points to <" << score+point << ">" << endl;
+            result << "Contestant <" << id << ">'s score increased by <" << point << "> points to <" << score+point << ">" << endl;
         }else{
-            cout << "Contestant <" << id << "> is not in the extended heap" << endl;
+            result << "Contestant <" << id << "> is not in the extended heap" << endl;
         }
     }
 
     //deduct point if Contest is found, if not print Contestant is not in extended heap
     //since point is decreased, heapify up
-    void Minheap::losePoints(int id, int point){
+    void Minheap::losePoints(int id, int point, ofstream &result){
         
         int whatId = getContestant(id).getId();
         if(whatId != 0){
             int score = getContestant(id).getPoint();
             getContestant(id).setPoint(score - point);
             heapUpward(extend[id]);
-            cout << "Contestant <" << id << ">'s score decreased by <" << score << "> points to <" << score-point << ">" << endl;
+            result << "Contestant <" << id << ">'s score decreased by <" << point << "> points to <" << score-point << ">" << endl;
         }else{
-            cout << "Contestant <" << id << "> is not in the extended heap" << endl;
+            result << "Contestant <" << id << "> is not in the extended heap" << endl;
         }
     }
 
     //print the contents of the extended heap 
-    void Minheap::showContestant(){
+    void Minheap::showContestant(ofstream &result){
         for(int i = 1; i<list_size; i++){
             if(list[i].getId() > 0){
-                cout << "Contestant <" << list[i].getId() << "> " << "in extended heap location <" << extend[list[i].getId()] << "> " 
+                result << "Contestant <" << list[i].getId() << "> " << "in extended heap location <" << extend[list[i].getId()] << "> " 
                 << "with score <" << list[i].getPoint() << ">" << endl;
             }
         }
     }
 
     //print the contents of the handle array inorder
-    void Minheap::showHandles(){
+    void Minheap::showHandles(ofstream &result){
         for(int i = 1; i<= list_size; i++){
             if(extend[i] > 0){
-                cout << "Contestant <" << i << "> stored in extended heap location <" << extend[i] << ">" << endl;
+                result << "Contestant <" << i << "> stored in extended heap location <" << extend[i] << ">" << endl;
             }else{
-                cout << "There is no Contestnat <" << i << "> in the extended heap: handle[<" << i << ">] = " << extend[i] <<endl;
+                result << "There is no Contestnat <" << i << "> in the extended heap: handle[<" << i << ">] = " << extend[i] <<endl;
             }
         }
     }
 
     //show the location of the contestant with id <k> in the heap, as follows
-    void Minheap::showLocation(int id){
+    void Minheap::showLocation(int id, ofstream &result){
 
         if(extend[list[id].getId()] > 0){
-            cout << "Contestant <" << id << "> stored in extended heap location <" << extend[id] << ">" << endl;      
+            result << "Contestant <" << id << "> stored in extended heap location <" << extend[id] << ">" << endl;      
         }else{
-            cout << "There is no Contestnat <" << id << "> in the extended heap: handle[<" << id << ">] = " << extend[id] <<endl; 
+            result << "There is no Contestnat <" << id << "> in the extended heap: handle[<" << id << ">] = " << extend[id] <<endl; 
         }
 
     }
 
     //Remove all contestants from the extended heap, in order, until only one remains
-    void Minheap::crownWinner(){
+    //print the winner, which is the last remaning node
+    void Minheap::crownWinner(ofstream &result){
         
         while(num > 2){
-            eliminateWeakest();
+            elimnateall();
         }
 
-        cout << "Contestant <" << list[1].getId() << "> wins with score <" << list[1].getPoint() << ">!" <<endl;
+        result << "Contestant <" << list[1].getId() << "> wins with score <" << list[1].getPoint() << ">!" <<endl;
 
     }
+
+    //remove all the elements in the heap except the Contestant with largest point
+    void Minheap::elimnateall(){
+
+        if(num > 1){
+            
+            extend[list[1].getId()] = -1;
+            swap(list[1], list[num-1]);
+            list[num-1] = Contestant(0,0);
+            num--;
+            heapDownward(1);
+        }
+     }
+    

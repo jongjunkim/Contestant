@@ -1,4 +1,4 @@
-16
+15
 insertContestant <1> <100>
 insertContestant <2> <95>
 insertContestant <3> <90>
@@ -15,16 +15,4 @@ insertContestant <13> <40>
 insertContestant <14> <35>
 showContestants
 findContestant <5>
-eliminateWeakest
-eliminateWeakest
-eliminateWeakest
-eliminateWeakest
-eliminateWeakest
-earnPoints <13> <40>
-showContestants
-losePoints <15> <70>
-showContestants
-showHandles
 crownWinner
-showContestants
-showHandles

@@ -11,7 +11,7 @@ using namespace std;
 
 
 //read textfile and insert Contestant to Extendedheap
-void readfile(string inputfile, Minheap &list){
+void readfile(string inputfile, ofstream &outputfile, Minheap &list){
 
 
     ifstream in(inputfile);
@@ -28,6 +28,7 @@ void readfile(string inputfile, Minheap &list){
 
         if(command == "insertContestant"){
             ss >> id >> score;
+            outputfile << command << " " << id << " " << score << endl;
             pos1 = id.find("<");
             pos2 = id.find(">");
 
@@ -38,18 +39,21 @@ void readfile(string inputfile, Minheap &list){
 
             num_score = stoi(score.substr(pos3+1, pos4-1));
 
-            list.insertContestant(Contestant(idnumber,num_score));
+            list.insertContestant(Contestant(idnumber,num_score), outputfile);
         }else if(command == "showContestants"){
-            list.showContestant();
+            outputfile << command << endl;
+            list.showContestant(outputfile);
         }else if(command == "findContestant"){
             ss >> id;
+            outputfile << command << id << endl;
             idnumber = stoi(id.substr(pos1+1, pos2-1));
-            list.findConetestant(idnumber);
+            list.findConetestant(idnumber, outputfile);
         }else if(command == "eliminateWeakest"){
-            list.eliminateWeakest();
+            outputfile << command << endl;
+            list.eliminateWeakest(outputfile);
         }else if(command  == "earnPoints"){
             ss >> id >> score;
-           
+            outputfile << command << " "<< id  << " " << score << endl;
             pos1 = id.find("<");
             pos2 = id.find(">");
 
@@ -60,10 +64,10 @@ void readfile(string inputfile, Minheap &list){
 
             num_score = stoi(score.substr(pos3+1, pos4-1));
 
-            list.earnPoints(idnumber, num_score);
+            list.earnPoints(idnumber, num_score, outputfile);
         }else if(command == "losePoints"){
             ss >> id >> score;
-           
+            outputfile << command << " "<< id  << " " << score << endl;
             pos1 = id.find("<");
             pos2 = id.find(">");
 
@@ -74,18 +78,21 @@ void readfile(string inputfile, Minheap &list){
 
             num_score = stoi(score.substr(pos3+1, pos4-1));
 
-            list.losePoints(idnumber, num_score);
+            list.losePoints(idnumber, num_score, outputfile);
         }else if(command == "showHandles"){
-            list.showHandles();
+            outputfile << command << endl;
+            list.showHandles(outputfile);
         }else if(command == "showLocation"){
             ss >> id;
+            outputfile << command << id << endl;
             pos1 = id.find("<");
             pos2 = id.find(">");
 
             idnumber = stoi(id.substr(pos1+1, pos2-1));
-            list.showLocation(idnumber);
+            list.showLocation(idnumber, outputfile);
         }else if(command == "crownWinner"){
-            list.crownWinner();
+            outputfile << command << endl;
+            list.crownWinner(outputfile);
         }
         else{
             list = Minheap(stoi(command));
@@ -102,8 +109,8 @@ int main(int argc, char* argv[]){
     Minheap extended(n);
     string input;
     string output;
-    ofstream output;
-    output.open("output.txt");
+    ofstream output_txt;
+    output_txt.open("output.txt");
 
     int o;
     const char *optstring = "m:p:";
@@ -125,7 +132,7 @@ int main(int argc, char* argv[]){
         }
     }
 
-    readfile(input, extended);
+    readfile(input, output_txt, extended);
 
     
 
