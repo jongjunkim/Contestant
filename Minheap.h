@@ -13,6 +13,7 @@ class Minheap{
         Contestant *list;
         int *extend;
         int num = 1;
+        int extend_num = 1;
         int list_size = 0;
         //ofstream output;
 

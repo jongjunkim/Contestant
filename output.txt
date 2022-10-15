@@ -6,27 +6,69 @@ insertContestant <3> <80>
 Conestant <3> inserted with initial score <80>
 insertContestant <4> <20>
 Conestant <4> inserted with initial score <20>
+insertContestant <5> <40>
+Conestant <5> inserted with initial score <40>
+insertContestant <6> <60>
+Conestant <6> inserted with initial score <60>
+insertContestant <7> <10>
+Conestant <7> inserted with initial score <10>
+insertContestant <8> <24>
+Conestant <8> inserted with initial score <24>
+insertContestant <9> <70>
+Conestant <9> inserted with initial score <70>
 showContestants
 Contestant <1> in extended heap location <1> with score <0>
 Contestant <2> in extended heap location <2> with score <15>
-Contestant <3> in extended heap location <3> with score <80>
+Contestant <7> in extended heap location <3> with score <10>
 Contestant <4> in extended heap location <4> with score <20>
+Contestant <5> in extended heap location <5> with score <40>
+Contestant <3> in extended heap location <6> with score <80>
+Contestant <6> in extended heap location <7> with score <60>
+Contestant <8> in extended heap location <8> with score <24>
+Contestant <9> in extended heap location <9> with score <70>
 findContestant<5>
-Contestant <5> is not in the extended heap
+Contestant <5> is in the extended heap with score <40>.
 eliminateWeakest
 Contestant <1> with current lowest score <0> eliminated
+showContestants
+Contestant <7> in extended heap location <1> with score <10>
+Contestant <2> in extended heap location <2> with score <15>
+Contestant <6> in extended heap location <3> with score <60>
+Contestant <4> in extended heap location <4> with score <20>
+Contestant <5> in extended heap location <5> with score <40>
+Contestant <3> in extended heap location <6> with score <80>
+Contestant <9> in extended heap location <7> with score <70>
+Contestant <8> in extended heap location <8> with score <24>
+insertContestant <10> <55>
+Conestant <10> inserted with initial score <55>
 losePoints <3> <40>
 Contestant <3>'s score decreased by <40> points to <40>
 earnPoints <2> <10>
 Contestant <2>'s score increased by <10> points to <25>
+losePoints <9> <67>
+Contestant <9>'s score decreased by <67> points to <3>
 showContestants
-Contestant <4> in extended heap location <1> with score <20>
-Contestant <2> in extended heap location <2> with score <25>
-Contestant <3> in extended heap location <3> with score <40>
+Contestant <9> in extended heap location <1> with score <3>
+Contestant <4> in extended heap location <2> with score <20>
+Contestant <7> in extended heap location <3> with score <10>
+Contestant <8> in extended heap location <4> with score <24>
+Contestant <5> in extended heap location <5> with score <40>
+Contestant <6> in extended heap location <6> with score <60>
+Contestant <3> in extended heap location <7> with score <40>
+Contestant <2> in extended heap location <8> with score <25>
+Contestant <10> in extended heap location <9> with score <55>
 showHandles
 There is no Contestnat <1> in the extended heap: handle[<1>] = -1
-Contestant <2> stored in extended heap location <2>
-Contestant <3> stored in extended heap location <3>
-Contestant <4> stored in extended heap location <1>
-There is no Contestnat <5> in the extended heap: handle[<5>] = -1
-crownWinnerContestant <3> wins with score <40>!
+Contestant <2> stored in extended heap location <8>
+Contestant <3> stored in extended heap location <7>
+Contestant <4> stored in extended heap location <2>
+Contestant <5> stored in extended heap location <5>
+Contestant <6> stored in extended heap location <6>
+Contestant <7> stored in extended heap location <3>
+Contestant <8> stored in extended heap location <4>
+Contestant <9> stored in extended heap location <1>
+Contestant <10> stored in extended heap location <9>
+There is no Contestnat <11> in the extended heap: handle[<11>] = -1
+There is no Contestnat <12> in the extended heap: handle[<12>] = -1
+crownWinner
+Contestant <6> wins with score <60>!

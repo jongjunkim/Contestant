@@ -1,18 +1,21 @@
-15
-insertContestant <1> <100>
-insertContestant <2> <95>
-insertContestant <3> <90>
-insertContestant <4> <85>
-insertContestant <5> <80> 
-insertContestant <6> <75>
-insertContestant <7> <70> 
-insertContestant <8> <65>
-insertContestant <9> <60>
-insertContestant <10> <55>
-insertContestant <11> <50>
-insertContestant <12> <45>
-insertContestant <13> <40>
-insertContestant <14> <35>
+12
+insertContestant <1> <0>
+insertContestant <2> <15>
+insertContestant <3> <80>
+insertContestant <4> <20>
+insertContestant <5> <40>
+insertContestant <6> <60>
+insertContestant <7> <10>
+insertContestant <8> <24>
+insertContestant <9> <70>
 showContestants
 findContestant <5>
+eliminateWeakest
+showContestants
+insertContestant <10> <55>
+losePoints <3> <40>
+earnPoints <2> <10>
+losePoints <9> <67>
+showContestants
+showHandles
 crownWinner

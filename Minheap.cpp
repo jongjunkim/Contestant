@@ -25,8 +25,9 @@ using namespace std;
         if(num != list_size ){
             list[num] = Contestant(person.getId(), person.getPoint());
             result << "Conestant <" << person.getId() << "> inserted with initial score <" << person.getPoint() << ">" << endl;
-            extend[num] = person.getId();
+            extend[extend_num] = num;
             num++;
+            extend_num++;
             heapUpward(num-1);
         }else{
             result << "Conestant <" << person.getId() << "> " << "could not be inserted because the extended heap is full" << endl;  
@@ -38,8 +39,9 @@ using namespace std;
     void Minheap::heapUpward(int leaf){
         
         int parent = leaf/2;
-    
+
         if(list[parent].getPoint() > list[leaf].getPoint()){
+
             extend[list[leaf].getId()] = parent;
             extend[list[parent].getId()] = leaf;
             swap(list[parent], list[leaf]);
